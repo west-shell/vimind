@@ -1,0 +1,30 @@
+{
+  "name": "vimind",
+  "version": "0.0.1",
+  "description": "vim style mind",
+  "main": "/src/vimind.js",
+  "scripts": {
+    "build":"node node_module/webpack/bin/webpack.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/west-shell/vimind.git"
+  },
+  "keywords": [
+    "vim",
+    "mind"
+  ],
+  "author": "weshell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/west-shell/vimind/issues"
+  },
+  "homepage": "https://github.com/west-shell/vimind#readme",
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "konva": "^4.1.5"
+  }
+}
