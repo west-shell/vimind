@@ -1,0 +1,2 @@
+# vimind
+vim style mind
