@@ -18,19 +18,17 @@ class Node extends Konva.Group {
         super(config)
         this.background = new Konva.Circle({
             fill: 'green',
-            shadowColor: 'black',
+            shadowColor: 'yellow',
             shadowBlur: 10,
-            shadowOffsetX: 10,
+            shadowOffsetX: 12,
             shadowOffsetY: 10,
             shadowOpacity: 0.2,
             cornerRadius: 10,
-            name: 'mindNode'
         });
         var text = this.text = new Konva.Text({
-            text: 'c',
+            text: 'vimind',
             fontSize: 30,
             align: 'center',
-            name: 'mindNode'
         })
         text.offsetX(text.width() / 2);
         text.offsetY(text.height() / 2);
@@ -67,23 +65,35 @@ class Node extends Konva.Group {
             background = this.getBackgroud(),
             width,
             height,
-            radius=20;
+            radius = 20;
         if (text && background) {
             width = text.width();
             height = text.height();
-            radius = Math.max(width, height,50)*0.6
+            radius = Math.max(width, height, 50) * 0.6
         }
         background.setAttrs({
             radius
         });
+        text.offsetX(width / 2);
+        text.offsetY(height / 2);
     }
 }
-class MinderNode {
+let initHooks = [];
+class MindNode {
+    static registerInitHook(hook) {
+        initHooks.push(hook);
+    }
     constructor(textOrData) {
         this.parent = null;
         this.root = this;
         this.children = [];
-        this.initContainer(textOrData);
+        this.initContainer(textOrData); let initHook;
+        while (initHooks.length) {
+            initHook = initHooks.shift();
+            if (initHook instanceof Function) {
+                initHook.call(this, this.data);
+            }
+        }
     }
     initContainer(textOrData) {
         var data = {
@@ -96,8 +106,6 @@ class MinderNode {
             data.text = textOrData;
         } else if (textOrData instanceof Object)
             data = Object.assign(data, textOrData);
-
-        var mindNode = this;
         var container = this.container = new Konva.Group({
             x: data.x,
             y: data.y,
@@ -233,7 +241,7 @@ class MinderNode {
 
         this.children.splice(index, 0, node);
         this.container.add(node.container);
-        this.container.fire('nodeappend', {
+        this.fire('nodeappend', {
             node,
             parent: node.parent,
             index
@@ -253,7 +261,8 @@ class MinderNode {
             node.root = node;
             node.container.remove();
         }
-        this.container.fire('noderemove', {
+        console.log(node);
+        this.fire('noderemove', {
             node
         });
     }
@@ -268,7 +277,7 @@ class MinderNode {
     }
 
     getCommonAncestor(node) {
-        return MinderNode.getCommonAncestor(this, node);
+        return MindNode.getCommonAncestor(this, node);
     }
 
     contains(node) {
@@ -276,7 +285,7 @@ class MinderNode {
     }
 
     clone() {
-        var cloned = new MinderNode();
+        var cloned = new MindNode();
 
         cloned.data = JSON.parse(JSON.stringify(this.data));
 
@@ -331,9 +340,9 @@ Object.assign(Minder.prototype, {
     },
 
     createNode(textOrData, parent, index) {
-        let node = new MinderNode(textOrData);
+        let node = new MindNode(textOrData);
         node.minder = this;
-        this.container.fire('nodecreate', {
+        this.fire('nodecreate', {
             node: node,
             parent: parent,
             index: index
@@ -356,4 +365,4 @@ Object.assign(Minder.prototype, {
         }
     }
 });
-export default MinderNode;
+export default MindNode;

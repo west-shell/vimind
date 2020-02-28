@@ -12,22 +12,22 @@ class Minder {
             var width = window.innerWidth;
             var height = window.innerHeight;
         }
-        var stage = this.stage= new Konva.Stage({
+        var stage = this.stage = new Konva.Stage({
             container: container,
             width: width || 1000,
             height: height || 700,
             draggable: true
         })
+        stage.fire()
         windowResize(stage);
         this.stage.minder = this;
         this.options = options;
-        let initHook;
-        while (initHooks.length) {
-            initHook = initHooks.shift();
+        initHooks.forEach(initHook => {
             if (initHook instanceof Function) {
                 initHook.call(this, this.options);
             }
-        }
+        })
+        this.fire('hooksDone')
     }
     static registerInitHook(hook) {
         initHooks.push(hook);

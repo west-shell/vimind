@@ -1,4 +1,11 @@
 import Minder from './minder';
+import './event';
+import './status';
 import './node';
 import './paper';
+import './module';
+import './data';
+import './layout';
+import './tianpan';
+import './connect';
 window.Vimind = Minder;

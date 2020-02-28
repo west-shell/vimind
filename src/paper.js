@@ -1,12 +1,12 @@
 import Konva from 'konva';
 import Minder from './minder';
-Minder.registerInitHook(function () {
+Minder.registerInitHook(function initlayer() {
     this._initlayer();
 });
 Object.assign(Minder.prototype, {
     _initlayer() {
         var stage = this.stage;
-        var container= this.container= new Konva.Layer();
+        var container = this.container = new Konva.Layer();
         var minder = this.container.minder = this;
         this.setRoot(this.createNode({ draggable: false }));
         stage.add(container);
