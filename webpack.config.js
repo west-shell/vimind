@@ -3,7 +3,7 @@ module.exports = {
   // mode: 'production',
   entry: './src/vimind.js',
   output: {
-    path: './dist',
+    path: __dirname + "/dist",
     filename: 'vimimd.js'
   }
 }

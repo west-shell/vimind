@@ -4,7 +4,7 @@
   "description": "vim style mind",
   "main": "/src/vimind.js",
   "scripts": {
-    "build":"node node_module/webpack/bin/webpack.js"
+    "dev":"node node_modules/webpack/bin/webpack.js -w"
   },
   "repository": {
     "type": "git",
