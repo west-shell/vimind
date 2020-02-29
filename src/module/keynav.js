@@ -20,7 +20,6 @@ function navigateTo(mind, key) {
                 mind.select(node.parent.children[index + 1]);
             break;
         case 'down':
-            console.log("down");
             if (node.children[0]) {
                 mind.select(node.children[0]);
             }

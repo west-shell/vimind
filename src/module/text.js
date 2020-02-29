@@ -1,5 +1,5 @@
 import Minder from '../minder';
-Minder.registerInitHook(function () {
+Minder.registerInitHook(function initTextEdit() {
     this._initTextEdit();
 });
 Object.assign(Minder.prototype, {
@@ -27,10 +27,8 @@ Object.assign(Minder.prototype, {
                 minder.textNode = null;
             }
         });
-        this.on("dblclick", e => {
-            if (e.getTargetNode() == null)
-                return;
-            var textNode = e.getTargetNode().text;
+        this.on("node-dblclick", e => {
+            var textNode = e.mindNode.node.text;
             minder.textNode = textNode;
             var textPosition = textNode.getAbsolutePosition();
             var stageBox = this.stage.container().getBoundingClientRect();

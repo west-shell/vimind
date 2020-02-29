@@ -1,26 +1,26 @@
 import Minder from './minder';
+import Command from './command';
 let modules = {};
 let Module = {};
 Module.register = function (name, module) {
     modules[name] = module;
 };
-// class testCommand extends Command {
-//     execute() {
-//         alert("textCommand");
-//     }
-// }
-// Module.register("test", {
-//     // defaultOptions:{},
-//     // init:{},
-//     commands: {
-//         "test": testCommand
-//     },
-//     // events:{},
-//     commandShortcutKeys: {
-//         "test": "select::a"
-//     }
-
-// })
+class testCommand extends Command {
+    execute() {
+        alert("textCommand");
+    }
+}
+Module.register("test", {
+    // defaultOptions:{},
+    // init:{},
+    commands: {
+        test: testCommand
+    },
+    // events:{},
+    commandShortcutKeys: {
+        test: "normal::a"
+    }
+})
 
 
 Minder.registerInitHook(function initModules() {

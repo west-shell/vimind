@@ -26,8 +26,8 @@ class Minder {
             if (initHook instanceof Function) {
                 initHook.call(this, this.options);
             }
-        })
-        this.fire('hooksDone')
+        });
+        this.fire('hooksDone');
     }
     static registerInitHook(hook) {
         initHooks.push(hook);

@@ -42,11 +42,11 @@ Object.assign(Minder.prototype, {
         this._bindEvents();
     },
     _bindEvents() {
-        var mind = this;
-        var stage = this.stage;
-        stage.on('click dblclick mousedown mouseup mousemove mouseover mousewheel touchstart touchmove touchend dragenter dragleave drop', e => {
-            mind.fire(e.type, e);
-        });
+        // var mind = this;
+        // var stage = this.stage;
+        // stage.on('click dblclick mousedown mouseup mousemove mouseover mousewheel touchstart touchmove touchend dragenter dragleave drop', e => {
+        //     mind.fire(e.type, e);
+        // });
     },
     _listen(type, callback) {
         var callbacks = this.eventCallbacks[type] || (this.eventCallbacks[type] = []);
@@ -94,7 +94,6 @@ Object.assign(Minder.prototype, {
     },
 
     fire(type, params) {
-        console.log(type);
         var e = new MindEvent(type, params);
         this._fire(e);
     }
@@ -103,9 +102,10 @@ Object.assign(MindNode.prototype, {
     _initEvents() {
         var mindNode = this;
         var node = this.node;
-        node.on('dblclick', e => {
-            this.fire("dblclick", {
-                node: mindNode
+        node.on('click dblclick ', e => {
+            e.cancelBubble = true;
+            this.fire('node-'+e.type, {
+                mindNode
             });
         })
     },

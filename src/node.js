@@ -87,13 +87,12 @@ class MindNode {
         this.parent = null;
         this.root = this;
         this.children = [];
-        this.initContainer(textOrData); let initHook;
-        while (initHooks.length) {
-            initHook = initHooks.shift();
+        this.initContainer(textOrData);
+        initHooks.forEach(initHook => {
             if (initHook instanceof Function) {
                 initHook.call(this, this.data);
             }
-        }
+        })
     }
     initContainer(textOrData) {
         var data = {
@@ -111,10 +110,10 @@ class MindNode {
             y: data.y,
             draggable: data.draggable
         });
-        var node = this.node = new Node({
-            name: 'mindNode'
-        });
+        var node = this.node = new Node();
         node.mindNode = this;
+        node.background.mindNode = this;
+        node.text.mindNode = this;
         container.add(node);
         container.mindNode = this;
         this.data = {
@@ -261,7 +260,6 @@ class MindNode {
             node.root = node;
             node.container.remove();
         }
-        console.log(node);
         this.fire('noderemove', {
             node
         });

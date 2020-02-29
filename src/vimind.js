@@ -1,11 +1,22 @@
 import Minder from './minder';
+import './option';
 import './event';
 import './status';
 import './node';
 import './paper';
-import './module';
-import './data';
 import './layout';
 import './tianpan';
 import './connect';
+import './keyreceiver';
+import './shortcut';
+import './select';
+import './data';
+import './connect';
+import './module';
+import './module/text';
+import './module/arrange';
+import './module/expand';
+import './module/node';
+import './module/keynav';
+import './module/dragtree'
 window.Vimind = Minder;
