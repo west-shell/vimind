@@ -8,10 +8,10 @@ MindNode.registerInitHook(function initEvents() {
 })
 class MindEvent {
     constructor(type, params) {
-        var mind = this;
+        var event = this;
         var params = params || {};
         for (var key in params) {
-            mind[key] = params[key];
+            event[key] = params[key];
         }
         this.type = type;
     }
@@ -39,14 +39,6 @@ class MindEvent {
 Object.assign(Minder.prototype, {
     _initEvents() {
         this.eventCallbacks = {};
-        this._bindEvents();
-    },
-    _bindEvents() {
-        // var mind = this;
-        // var stage = this.stage;
-        // stage.on('click dblclick mousedown mouseup mousemove mouseover mousewheel touchstart touchmove touchend dragenter dragleave drop', e => {
-        //     mind.fire(e.type, e);
-        // });
     },
     _listen(type, callback) {
         var callbacks = this.eventCallbacks[type] || (this.eventCallbacks[type] = []);
@@ -59,7 +51,7 @@ Object.assign(Minder.prototype, {
             callbacks = callbacks.concat(this.eventCallbacks[status + '.' + e.type.toLowerCase()] || []);
         }
         if (callbacks.length === 0) {
-            return;
+            return ;
         }
         for (var i = 0; i < callbacks.length; i++) {
             callbacks[i].call(this, e);
@@ -71,7 +63,6 @@ Object.assign(Minder.prototype, {
         name.split(/\s+/).forEach(function (n) {
             mind._listen(n.toLowerCase(), callback);
         });
-        return this;
     },
 
     off(name, callback) {
@@ -95,7 +86,7 @@ Object.assign(Minder.prototype, {
 
     fire(type, params) {
         var e = new MindEvent(type, params);
-        this._fire(e);
+        return this._fire(e);
     }
 });
 Object.assign(MindNode.prototype, {
@@ -104,7 +95,7 @@ Object.assign(MindNode.prototype, {
         var node = this.node;
         node.on('click dblclick ', e => {
             e.cancelBubble = true;
-            this.fire('node-'+e.type, {
+            this.fire('node-' + e.type, {
                 mindNode
             });
         })

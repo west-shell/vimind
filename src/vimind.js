@@ -7,7 +7,6 @@ import './paper';
 import './layout';
 import './tianpan';
 import './connect';
-import './keyreceiver';
 import './shortcut';
 import './select';
 import './data';

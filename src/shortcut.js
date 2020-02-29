@@ -1,6 +1,9 @@
 import Minder from './minder';
-import MinderEvent from './event';
 import keymap from './keymap';
+
+Minder.registerInitHook(function initShortcutKey() {
+    this._initShortcutKey();
+});
 
 function getMetaKeyCode(unknown) {
     var CTRL_MASK = 0x1000;
@@ -41,39 +44,26 @@ function getMetaKeyCode(unknown) {
 
     return metaKeyCode;
 }
-Object.assign(MinderEvent.prototype, {
-    isShortcutKey(keyCombine) {
-        if (this.type !== "keydown")
-            return;
-        var keyEvent = this;
-        if (!keyEvent) return false;
-        return getMetaKeyCode(keyCombine) == getMetaKeyCode(keyEvent)
-    }
-});
-
-Minder.registerInitHook(function initShortcutKey() {
-    this._initShortcutKey();
-});
 
 Object.assign(Minder.prototype, {
-
     _initShortcutKey() {
         var mind = this;
+        var container = this.stage.container();
+        container.tabIndex = 1;
+        container.focus();
         var map = this.shortcutKeys = {};
-        var has = 'hasOwnProperty';
-        this.on('keydown', function (e) {
+        container.addEventListener('keydown', e => {
             for (var keys in map) {
-                if (!map[has](keys)) continue;
-                if (e.isShortcutKey(keys)) {
+                if (getMetaKeyCode(e) == getMetaKeyCode(keys)) {
                     var fn = map[keys];
                     if (fn.statusCondition && fn.statusCondition != this.getStatus()) return;
                     fn();
                     mind.layout();
+                    e.preventDefault();
                 }
             }
-        });
+        })
     },
-
     addShortcut(keys, fn) {
         var binds = this.shortcutKeys;
         keys.split(/\|\s*/).forEach(function (combine) {
@@ -87,7 +77,6 @@ Object.assign(Minder.prototype, {
             binds[combine] = fn;
         });
     },
-
     addCommandShortcutKeys(command, shortcutKeys) {
         var binds = this.commandShortcutKeys || (this._commandShortcutKeys = {});
         var obj = {};
@@ -107,7 +96,6 @@ Object.assign(Minder.prototype, {
             });
         })
     },
-
     getCommandShortcutKey(cmd) {
         var binds = this.commandShortcutKeys;
         return binds && binds[cmd] || null;

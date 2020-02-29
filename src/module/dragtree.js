@@ -9,12 +9,10 @@ Module.register('DragTreeModule', {
             if (!e.target || !e.target.mindNode)
                 return;
             node = e.target.mindNode;
-            console.log(node);
             node.node.visible(false);
             layer.draw();
             var pos = stage.getPointerPosition();
             var shape = layer.getIntersection(pos);
-            console.log(shape);
             if (shape && shape.mindNode) {
                 var downNode = shape.mindNode;
                 node.parent.removeChild(node);
