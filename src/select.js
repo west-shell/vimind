@@ -122,11 +122,11 @@ Object.assign(Minder.prototype, {
 Object.assign(MinderNode.prototype, {
     select() {
         this.selected = true;
-        this.data.text = "red";
+        this.node.background.stroke('yellow');
     },
     unselect() {
         this.selected = false;
-        this.data.text = 'blue';
+        this.node.background.stroke('');
     },
     toggleSelect() {
         if (!this.selected)

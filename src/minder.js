@@ -8,17 +8,14 @@ class Minder {
         if (options.container)
             container = options.container;
         else container = document.createElement('div');
-        if (window) {
-            var width = window.innerWidth;
-            var height = window.innerHeight;
-        }
+        var width = window.innerWidth;
+        var height = window.innerHeight;
         var stage = this.stage = new Konva.Stage({
-            container: container,
-            width: width || 1000,
-            height: height || 700,
-            draggable: true
+            container,
+            width,
+            height,
+            draggable:true
         })
-        stage.fire()
         windowResize(stage);
         this.stage.minder = this;
         this.options = options;
