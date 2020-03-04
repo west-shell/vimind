@@ -86,6 +86,7 @@ Object.assign(Minder.prototype, {
 
     fire(type, params) {
         var e = new MindEvent(type, params);
+        e.minder=this;
         return this._fire(e);
     }
 });

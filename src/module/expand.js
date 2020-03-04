@@ -17,8 +17,8 @@ Module.register('Expand', function () {
         expand() {
             this.setData(EXPAND_STATE_DATA, STATE_EXPAND);
             this.children.forEach(element => {
-               element.container.visible(true); 
-               element.connection.visible(true)
+                element.container.visible(true);
+                element.connection.visible(true)
             });
             return this;
         },
@@ -121,7 +121,7 @@ Module.register('Expand', function () {
         constructor(node) {
             if (!node) return;
             var expander = this.container = new Konva.Group();
-            this.node=node;
+            this.node = node;
             this.outline = new Konva.Circle({
                 radius: 16,
                 fill: 'red',
@@ -152,18 +152,18 @@ Module.register('Expand', function () {
     }
     return {
         commands: {
-            'expand': ExpandCommand,
-            'expandtolevel': ExpandToLevelCommand,
-            'collapse': CollapseCommand
+            expand: ExpandCommand,
+            expandtolevel: ExpandToLevelCommand,
+            collapse: CollapseCommand
         },
         events: {
-            'nodecreate': e => {
+            nodecreate: e => {
                 e.node.expander = new Expander(e.node);
             }
         },
         commandShortcutKeys: {
-            'expand': 'normal::alt+/',
-            'collapse': 'normal::alt+.'
+            expand: 'normal::alt+/',
+            collapse: 'normal::alt+.'
         }
     }
 })

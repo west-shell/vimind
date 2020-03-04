@@ -13,7 +13,7 @@ Object.assign(Minder.prototype, {
         let scaleBy = 1.02;
         var x = window.innerWidth / 2;
         var y = window.innerHeight / 2;
-        container.position({ x, y });
+        stage.position({ x, y });
         stage.on('wheel', e => {
             e.evt.preventDefault();
             var oldScale = stage.scaleX();

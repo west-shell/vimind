@@ -18,4 +18,5 @@ import './module/expand';
 import './module/node';
 import './module/keynav';
 import './module/dragtree'
+import './module/view';
 window.Vimind = Minder;

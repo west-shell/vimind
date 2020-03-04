@@ -119,9 +119,9 @@ class ArrangeCommand extends Command {
 
 Module.register('ArrangeModule', {
     commands: {
-        'arrangeup': ArrangeUpCommand,
-        'arrangedown': ArrangeDownCommand,
-        'arrange': ArrangeCommand
+        arrangeup: ArrangeUpCommand,
+        arrangedown: ArrangeDownCommand,
+        arrange: ArrangeCommand
     },
     contextmenu: [
         { command: 'arrangeup' },
@@ -129,7 +129,7 @@ Module.register('ArrangeModule', {
         { divider: true }
     ],
     commandShortcutKeys: {
-        'arrangeup': 'normal::alt+up',
-        'arrangedown': 'normal::alt+Down'
+        arrangeup: 'normal::alt+up',
+        arrangedown: 'normal::alt+Down'
     }
 });

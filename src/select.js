@@ -25,7 +25,8 @@ Object.assign(Minder.prototype, {
         });
         if (changed.length) {
             this.toggleSelect(changed);
-            this.fire('selectionchange');
+            this.fire('selectedchange');
+            console.log("change");
             this.stage.batchDraw();
         }
     },
