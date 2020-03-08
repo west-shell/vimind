@@ -1,2 +1,12 @@
 # vimind
 vim style mind
+
+这个是我拿来练手玩的项目
+基本上就是用konva做引擎重写kitymind的核心内容
+konva的文档还算不错 示例也够用
+结合kitymind的组织结构 渲染部分不用操心了 
+kitymind是用个minder类做基础 没用继承派生
+而是通过注册钩子函数实现模块化 并有一套自己的事件机制
+模块通过钩子函数实现对minder构造函数进行扩展
+通过Object.assign扩展其他部分
+模块直接通过事件进行解耦合
