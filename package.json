@@ -22,7 +22,7 @@
   "homepage": "https://github.com/west-shell/vimind#readme",
   "devDependencies": {
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "konva": "^4.1.5"
